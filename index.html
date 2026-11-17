@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dobbin counter</title>
+<style>
+  html,body{margin:0;background:transparent;}
+  .wrap{display:flex;gap:40px;justify-content:center;font-family:Avenir,Arial,sans-serif;color:#404040;text-align:center;padding:8px 0;}
+  .num{font-size:48px;font-weight:700;line-height:1.1;}
+  .lab{font-size:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div><div class="num">+<span class="n" data-v="172">0</span></div><div class="lab">Projects</div></div>
+  <div><div class="num">+<span class="n" data-v="90">0</span></div><div class="lab">Countries</div></div>
+</div>
+<script>
+document.querySelectorAll('.n').forEach(function(el){
+  var end=+el.dataset.v, dur=2000, t0=performance.now();
+  (function step(t){
+    var p=Math.min((t-t0)/dur,1);
+    el.textContent=Math.round(end*(1-Math.pow(1-p,3)));
+    if(p<1) requestAnimationFrame(step);
+  })(t0);
+});
+</script>
+</body>
+</html>
